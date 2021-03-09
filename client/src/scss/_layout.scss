@@ -1,0 +1,144 @@
+// ------------------------
+// contains all the CSS that handles the layout, such as the container and any grid systems.
+// ------------------------
+
+.container {
+  width    : 100%;
+  padding  : 0 .5rem;
+  flex-wrap: inherit;
+
+  @include breakpoint(small) {
+    padding: 0 2rem;
+  }
+
+  @include breakpoint(medium) {
+    padding: 0 3rem;
+  }
+
+  @include breakpoint(large) {
+    padding: 0 4rem;
+  }
+
+  @include breakpoint(xlarge) {
+    padding: 0 6rem;
+  }
+}
+
+.position-relative {
+  position: relative;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.d-block {
+  display: block;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-stretch {
+  align-items: stretch;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.row {
+  display  : flex;
+  flex-wrap: wrap;
+
+  &-cols-2>* {
+    flex: 50%;
+  }
+}
+
+.border-bottom {
+  border-bottom: 1px solid $grey;
+}
+
+.border-end {
+  border-right: 1px solid $grey;
+}
+
+.col {
+  flex-direction: column;
+  width         : 100%;
+}
+
+.mw-auth {
+  max-width: 24rem;
+}
+
+.mw-settings {
+  max-width: 36rem;
+}
+
+@for $i from 1 to 12 {
+  .col-#{$i} {
+    flex : 0 0 auto;
+    width: 100%
+  }
+
+  @include breakpoint(small) {
+    .col-#{$i} {
+      flex : 0 0 auto;
+      width: #{(100% / 12) * $i}
+    }
+  }
+}
+
+// Paddings & Margins
+@each $side in $sides {
+  @for $i from 1 through length($spaceamounts) {
+    .m#{str-slice($side, 0, 1)}-#{$i} {
+      margin-#{$side}: #{nth($spaceamounts, $i)}rem !important;
+    }
+
+    .p#{str-slice($side, 0, 1)}-#{$i} {
+      padding-#{$side}: #{nth($spaceamounts, $i)}rem !important;
+    }
+  }
+}
+
+@for $i from 1 through length($spaceamounts) {
+  .my-#{$i} {
+    margin-top   : #{nth($spaceamounts, $i)}rem !important;
+    margin-bottom: #{nth($spaceamounts, $i)}rem !important;
+  }
+
+  .mx-#{$i} {
+    margin-left : #{nth($spaceamounts, $i)}rem !important;
+    margin-right: #{nth($spaceamounts, $i)}rem !important;
+  }
+
+  .py-#{$i} {
+    padding-top   : #{nth($spaceamounts, $i)}rem !important;
+    padding-bottom: #{nth($spaceamounts, $i)}rem !important;
+  }
+
+  .px-#{$i} {
+    padding-left : #{nth($spaceamounts, $i)}rem !important;
+    padding-right: #{nth($spaceamounts, $i)}rem !important;
+  }
+
+  .m-#{$i} {
+    margin: #{nth($spaceamounts, $i)}rem;
+  }
+
+  .p-#{$i} {
+    padding: #{nth($spaceamounts, $i)}rem;
+  }
+}

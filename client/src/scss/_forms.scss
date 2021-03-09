@@ -1,0 +1,37 @@
+form {
+  margin: auto;
+}
+
+.form-label {
+  @extend .mb-1;
+  font-weight: $font-weight-bold;
+  @include fluid-type(.75)
+}
+
+.form-control {
+  font-weight: $font-weight-bold;
+  width      : 100%;
+  @extend .mb-2;
+  @extend .px-2;
+  @extend .py-1;
+  outline         : none;
+  border          : 1px solid $grey;
+  border-radius   : $border-radius;
+  background-color: $grey;
+  transition      : $transition-m;
+
+  &:hover:not(:focus) {
+    border-color: $green;
+  }
+
+  &:focus {
+    box-shadow: 0 2px 0 1px $green;
+  }
+}
+
+.form-password {
+  cursor  : pointer;
+  position: absolute;
+  top     : .5rem;
+  right   : 1rem;
+}

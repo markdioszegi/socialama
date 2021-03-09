@@ -1,0 +1,47 @@
+// Buttons
+
+.btn {
+  display       : inline-block;
+  text-align    : center;
+  cursor        : pointer;
+  color         : inherit;
+  font-weight   : $font-weight-bolder;
+  border        : none;
+  outline       : none;
+  padding       : 1rem;
+  vertical-align: middle;
+  user-select   : none;
+  border-radius : $border-radius-lg;
+  transition    : $transition-m;
+
+  &-icon {
+    i {
+      margin-left: 1rem;
+      font-size  : larger;
+    }
+  }
+
+  &-default {
+    &:hover {
+      background-color: lighten($green, 20%);
+    }
+
+    &:focus {
+      background-color: $green;
+    }
+  }
+}
+
+@each $color,
+$value in $theme-colors {
+  .btn-#{$color} {
+    @include button-variant($value);
+  }
+}
+
+@each $color,
+$value in $theme-colors {
+  .btn-outline-#{$color} {
+    @include button-outline-variant($value);
+  }
+}

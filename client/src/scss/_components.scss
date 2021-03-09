@@ -1,0 +1,109 @@
+// ------------------------
+// anything reusable such as buttons, navbars, cards etc.
+// ------------------------
+
+.card {
+  background-color: white;
+  box-shadow      : $shadow-md;
+  border-radius   : $border-radius-lg;
+
+  &-header {
+    padding: 1rem 1rem 0;
+  }
+
+  &-body {
+    padding: 1rem;
+  }
+}
+
+.table-responsive {
+  overflow-x  : auto;
+  //word-break: break-all;
+}
+
+table {
+  cursor         : default;
+  border-spacing : 0;
+  border-collapse: bottom;
+  width          : 100%;
+
+  tr {
+    &:hover {
+      background-color: rgb(218, 218, 218);
+    }
+
+    th {
+      padding: 1rem;
+    }
+
+    td {
+      text-align: center;
+      padding   : 0.5rem;
+    }
+  }
+}
+
+.tile {
+  color     : $primary;
+  transition: $transition-m;
+
+  i {
+    @include fluid-type(1.75)
+  }
+
+  &:hover {
+    color: $green;
+  }
+}
+
+.dropdown-menu {
+  position     : absolute;
+  top          : 100%;
+  margin-top   : 1rem;
+  border-radius: $border-radius-lg;
+  right        : 0;
+  z-index      : $zindex-dropdown;
+  box-shadow   : $shadow-xl;
+  background   : $white;
+  width        : 300px;
+}
+
+.profile-menu-link {
+  background-color: inherit;
+  cursor          : pointer;
+  outline         : none;
+  border          : none;
+  width           : 100%;
+  height          : 2.5rem;
+  width           : 2.5rem;
+  color           : $primary;
+  transition      : $transition-m;
+  border-radius   : $border-radius;
+
+  &.active {
+    color           : $white;
+    background-color: darken($dark-blue, 20%);
+  }
+
+  &:hover:not(.active) {
+    background-color: darken($bg-color, 5%);
+  }
+}
+
+.profile-avatar {
+  width        : 48px;
+  height       : 48px;
+  object-fit   : cover;
+  border-radius: $border-radius-lg;
+}
+
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: $transition-m;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity  : 0;
+  transform: translateY(8px);
+}

@@ -1,0 +1,70 @@
+.sticky {
+  position    : fixed;
+  background  : $white;
+  top         : 0;
+  right       : 0;
+  left        : 0;
+  //width     : 100%;
+  box-shadow  : $shadow-lg;
+  z-index     : $zindex-sticky;
+  transition  : $transition-m;
+}
+
+.navbar-wrapper {
+  height: 2.5rem;
+}
+
+nav {
+  position        : relative;
+  display         : flex;
+  flex-wrap       : wrap;
+  align-items     : center;
+  padding         : .75rem 0;
+  background-color: $bg-color; //$bg-color
+}
+
+.navbar-nav {
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+
+  //background-color: rgb(178, 200, 149);
+}
+
+.nav-item {
+  position       : relative;
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  width          : 100%;
+  margin-left    : .5rem;
+
+  @include breakpoint(medium) {
+    margin-left: 1rem;
+  }
+}
+
+.nav-link {
+  display        : inline-flex;
+  align-items    : center;
+  justify-content: center;
+  height         : 2.5rem;
+  width          : 2.5rem;
+  color          : $primary;
+  transition     : $transition-m;
+  border-radius  : $border-radius-lg;
+
+  &:hover {
+    //color           : lighten($bg-color, 5%);
+    background-color: darken($bg-color, 5%);
+  }
+
+  &.router-link-active {
+    color           : $white;
+    background-color: darken($dark-blue, 20%);
+  }
+}
+
+.navbar-logo {
+  height: 2.5rem;
+}
