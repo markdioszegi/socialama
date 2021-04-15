@@ -25,8 +25,11 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      ignoreRouteChange: false,
+    }
   },
+
   props: {
     isLarge: {
       type: Boolean,
@@ -34,31 +37,40 @@ export default {
     },
     currentPage: {
       type: Number,
-      default: 1,
     },
     totalPages: {
       type: Number,
-      default: 1,
     },
+  },
+
+  created() {
+    this.changePage(Number(this.$route.query.pageNumber) || this.currentPage)
   },
 
   methods: {
     changePage(newPage) {
-      if (this.currentPage != newPage) this.$emit('page-changed', newPage)
-
-      this.$router.push({
-        path: this.$route.path,
-        query: {
-          pageNumber: newPage,
-        },
-      })
+      //console.log(this.currentPage + ' | ' + newPage)
+      this.$emit('page-changed', newPage)
+      this.ignoreRouteChange = true
+      // change query
+      this.$router
+        .push({
+          path: this.$route.path,
+          query: {
+            ...this.$route.query,
+            pageNumber: newPage,
+          },
+        })
+        .then(() => (this.ignoreRouteChange = false))
     },
   },
 
   watch: {
-    $route() {
-      this.changePage(Number(this.$route.query.pageNumber))
-      console.log('route changed')
+    $route(to, from) {
+      if (!this.ignoreRouteChange)
+        if (to.name === from.name) {
+          this.changePage(Number(this.$route.query.pageNumber))
+        }
     },
   },
 }

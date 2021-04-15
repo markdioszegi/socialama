@@ -82,27 +82,23 @@ export default {
       users: [],
       metaTag: null,
       currentPage: 1,
-      perPage: 20,
+      perPage: 10,
       totalPages: null,
     }
   },
 
-  mounted() {
-    this.fetchData()
-  },
-
   methods: {
     onPageChanged(pageNumber) {
-      console.log(pageNumber)
+      //console.log(pageNumber)
       this.currentPage = pageNumber
       this.fetchData()
     },
 
     fetchData() {
       this.loading = true
-      console.log('Fetching...')
+      //console.log('Fetching...')
       setTimeout(() => {
-        fetch(process.env.VUE_APP_API_BASE_URL + `/users?page=${this.currentPage}&limit=20`, {
+        fetch(process.env.VUE_APP_API_BASE_URL + `/users?page=${this.currentPage}&limit=${this.perPage}`, {
           method: 'get',
           credentials: 'include',
           headers: { Authorization: `bearer ${this.$store.state.accessToken}` },
@@ -118,12 +114,6 @@ export default {
       }, 500)
     },
   },
-
-  /* watch: {
-    currentPage() {
-      this.fetchData()
-    },
-  }, */
 }
 </script>
 
