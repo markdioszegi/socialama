@@ -2,13 +2,19 @@
 // anything reusable such as buttons, navbars, cards etc.
 // ------------------------
 
+//------ Card
+
 .card {
   background-color: white;
   box-shadow      : $shadow-md;
   border-radius   : $border-radius-lg;
 
   &-header {
-    padding: 1rem 1rem 0;
+    border-top-left-radius   : $border-radius-lg;
+    border-top-right-radius  : $border-radius-lg;
+    //background             : linear-gradient(25deg, $secondary 0%, $green 100%);
+    @extend .pt-1,
+    .px-2
   }
 
   &-body {
@@ -56,6 +62,8 @@ table {
   }
 }
 
+//----- Dropdown
+
 .dropdown-menu {
   position     : absolute;
   top          : 100%;
@@ -97,13 +105,71 @@ table {
   border-radius: $border-radius-lg;
 }
 
-.dropdown-enter-active,
-.dropdown-leave-active {
-  transition: $transition-m;
+//----- Modal
+
+.modal {
+  background: $modal-bg;
+  position  : fixed;
+  z-index   : $zindex-modal;
+  left      : 0;
+  top       : 0;
+  width     : 100%;
+  height    : 100%;
+
+  &-content {
+    max-width : 360px;
+    margin    : auto;
+    margin-top: 1rem;
+  }
+
+  &-close {
+    text-align: center;
+  }
 }
 
-.dropdown-enter-from,
-.dropdown-leave-to {
-  opacity  : 0;
-  transform: translateY(8px);
+//----- Pagination
+
+.pagination {
+  display      : flex;
+  padding-left : 0;
+  list-style   : none;
+  margin-top   : .5rem;
+  margin-bottom: .5rem;
+
+  .page-item {
+    border-top   : 1px solid black;
+    border-bottom: 1px solid black;
+    transition   : $transition-m;
+
+    .page-link {
+      padding: 0.5rem 1rem;
+      cursor : pointer;
+    }
+
+    &:hover {
+      background-color: lighten($green, 25%);
+    }
+
+    &.active,
+    &:active {
+      background-color: $green;
+      cursor          : default;
+    }
+
+    &.disabled {
+      background-color: $grey;
+    }
+
+    &:first-child {
+      border-top-left-radius   : $border-radius;
+      border-bottom-left-radius: $border-radius;
+      border-left              : 1px solid black;
+    }
+
+    &:last-child {
+      border-top-right-radius   : $border-radius;
+      border-bottom-right-radius: $border-radius;
+      border-right              : 1px solid black;
+    }
+  }
 }

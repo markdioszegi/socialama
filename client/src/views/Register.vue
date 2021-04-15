@@ -39,7 +39,7 @@
         </div>
 
         <div class="col">
-          <button type="submit" class="btn btn-default btn-icon">Register<i class="fas fa-user-plus"></i></button>
+          <button type="submit" class="btn btn-default btn-right-icon">Register<i class="fas fa-user-plus"></i></button>
         </div>
       </div>
     </div>
@@ -79,6 +79,7 @@ export default {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data)
           if (!data.success) return (this.errors = data)
           this.$router.push({ name: 'home', params: { redirectMsg: 'Account successfully created!' } })
         })

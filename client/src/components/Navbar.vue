@@ -26,13 +26,14 @@
             </router-link>
           </li>
           <li v-click-outside="clickOutsideProfileMenu" v-if="isLoggedIn" class="nav-item">
-            <button
+            <a
               @click="showProfileMenu"
-              class="profile-menu-link"
+              class="profile-menu-link d-flex align-items-center justify-content-center"
               :class="{ active: $route.path.includes('/' + user.username) }"
             >
               <i class="fas fa-user icon"></i>
-            </button>
+            </a>
+            <!-- d-flex align-items-center justify-content-center -->
             <!-- <router-link @click="showProfileMenu = !showProfileMenu" class="nav-link" :to="'/' + user.username">
                 <i class="fas fa-user icon"></i>
                 <span> {{ user.username }}</span>

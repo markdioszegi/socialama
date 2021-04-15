@@ -1,8 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, Not, BeforeInsert } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { IsEmail, MinLength, MaxLength, IsAlphanumeric } from 'class-validator'
 import { ExtendedBaseEntity } from './ExtendedBaseEntity'
 import { IsUnique } from '../validators/IsUnique'
-import { Request } from 'express'
 
 @Entity({ name: 'users' })
 export class User extends ExtendedBaseEntity {

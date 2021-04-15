@@ -10,6 +10,8 @@ import Routes from './routes/index'
 import { checkAuth } from './middleware/CheckAuth'
 import { createUsers } from './faker/createUsers'
 
+import swagger from './swagger/swagger'
+
 createConnection()
   .then(async (connection) => {
     // create express app
@@ -18,10 +20,9 @@ createConnection()
     app.use(bodyParser.json())
     app.use(cookieParser())
 
-    // Monitoring tool
-    /* const monitor = require('express-status-monitor')()
-    app.use(monitor)
-    app.get('/stats', monitor.pageRoute) */
+    //-------- Swagger init
+    swagger(app)
+    //-------- Swagger init End
 
     // register express routes from defined application routes
     Routes.forEach((route) => {

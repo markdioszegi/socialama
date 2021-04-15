@@ -19,14 +19,16 @@
 - **argon2**: a great encryption method
 - **MySQL**: the database driver
 - **TypeORM**: synchronizing models (entities) with the database
-- **class-validator**: for validation
+- **class-validator**: for validation (although I also use custom validation)
 - **jsonwebtoken**: for signing and veryfing tokens (authentication)
 - **faker**: for creating massive amount of fake data
+- **swagger-ui-express** & **swagger-jsdoc**: documenting the REST API
 
 # Features that'll be implemented in the future
 
 - Guests can register and login (done)
-- Users can edit their usernames and passwords
+- Users can edit their usernames and passwords (done)
+- Users can set a profile picture
 - Users can post posts and guests can view it
 - Users can view each other's profiles
 - Users can like posts and comment on them
@@ -52,6 +54,14 @@ _this section is incomplete for the time being_
 
 # REST API
 
+# Documenting REST API with Swagger
+
+<img src="https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg" width=256 alt="swagger logo">
+
+I decided to document my REST API with Swagger. I believe it's a much more cleaner and fancy alternative than defining routes with plain text.
+
+Swagger is a set of rules (in other words, a specification) for a format describing REST APIs. The format is both machine-readable and human-readable.
+
 ```
 GET /api/users (list all users)
 GET /api/users?page=1&limit=10 (paginates the users)
@@ -61,6 +71,7 @@ POST /api/auth/register (register the user)
 POST /api/auth/login (sign in the user)
 POST /api/auth/logout (resets the refresh token cookie & resets the user in the frontend store)
 POST /api/auth/refresh_token (refreshes the token of the user ! requires an access token)
+POST /api/auth/edit (edits various credentials of the user ! requires an access token)
 GET /api/auth/payload (gives back the user's payload ! requires an access token)
 ```
 
@@ -68,6 +79,7 @@ TODOS:
 
 //-------Backend
 
+User has ExtendedBaseEntity which has BaseEntity! (User->ExtendedBaseEntity->BaseEntity)
 Rearrange routes, expand middlewares (auth, roles)
 Refactor env/config vars
 Authentication and Role system:
@@ -79,7 +91,9 @@ Admins can access restricted routes and more resources
 //-------Frontend
 
 Keep the users auth state and handle it beautifully !!! JWT can be decoded here too
-Route guards:
+
+- Reauthenticate before the token expires
+  Route guards:
 
 - requiresGuest: if the user is logged in can't access
 - requiresAuth: user must be logged in to access

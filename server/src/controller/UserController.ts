@@ -8,8 +8,16 @@ export class UserController {
     return paginate(request, response, User)
   }
 
+  // Get one by ID
   async one(request: Request, response: Response, next: NextFunction) {
-    return { status: 'not implemented' }
+    console.log(request.params.userId)
+
+    const user = await User.findOne(request.params.userId)
+    if (!user) {
+      response.status(404)
+      return { error: 'Not found' }
+    }
+    return user
   }
 
   async hello(request: Request, response: Response, next: NextFunction) {
@@ -57,6 +65,9 @@ async function paginate(request: Request, response: Response, model) {
   }
 
   results.users = await model.find(findOptions)
+
+  results.totalResults = (await model.find({ where: findOptions.where })).length
+  results.totalPages = Math.ceil(results.totalResults / findOptions.take) //Math.ceil(results.totalResults / +limit)
 
   return results
 }

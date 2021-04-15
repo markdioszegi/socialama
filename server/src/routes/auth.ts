@@ -31,4 +31,10 @@ export default [
     controller: AuthController,
     action: 'payload',
   },
+  {
+    method: 'post',
+    route: '/auth/edit',
+    controller: AuthController,
+    action: 'edit',
+  },
 ]

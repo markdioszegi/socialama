@@ -47,12 +47,13 @@ const actions = {
   },
 
   // Reauthenticate the user
-  async reAuth({ commit, state }) {
+  // TODO: only reauthenticates after page refresh -> should loop it
+  async reAuth({ commit, getters }) {
     return fetch(process.env.VUE_APP_API_BASE_URL + '/auth/refresh_token', {
       method: 'post',
       credentials: 'include',
       headers: {
-        Authorization: `bearer ${state.accessToken}`,
+        Authorization: `bearer ${getters.accessToken}`,
       },
     })
       .then((res) => res.json())
@@ -68,6 +69,7 @@ const actions = {
   },
 
   async logout({ commit }) {
+    // TODO: Should check if JWT is valid
     return fetch(process.env.VUE_APP_API_BASE_URL + '/auth/logout', {
       method: 'post',
       credentials: 'include',
@@ -77,6 +79,45 @@ const actions = {
         commit('setAccessToken', null)
         commit('setUser', {})
         return Promise.resolve()
+      })
+      .catch((err) => {
+        return Promise.reject(err)
+      })
+  },
+
+  // Get and set the current user via JWT
+  async payload({ commit, getters }) {
+    return fetch(process.env.VUE_APP_API_BASE_URL + '/auth/payload', {
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${getters.accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        commit('setUser', data)
+        return Promise.resolve()
+      })
+      .catch((error) => {
+        return Promise.reject(error)
+      })
+  },
+
+  async edit({ getters, dispatch }, creds) {
+    return fetch(process.env.VUE_APP_API_BASE_URL + '/auth/edit', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${getters.accessToken}`,
+      },
+      body: JSON.stringify(creds),
+    })
+      .then((res) => res.json())
+      .then(async (data) => {
+        if (!data.errors) await dispatch('reAuth')
+        return Promise.resolve(data)
       })
       .catch((err) => {
         return Promise.reject(err)

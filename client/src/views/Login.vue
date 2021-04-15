@@ -29,7 +29,7 @@
         </div>
 
         <div class="col">
-          <button type="submit" class="btn btn-default btn-icon">Login<i class="fas fa-user-plus"></i></button>
+          <button type="submit" class="btn btn-default btn-right-icon">Login<i class="fas fa-user-plus"></i></button>
         </div>
       </div>
     </div>

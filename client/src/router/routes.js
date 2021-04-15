@@ -40,6 +40,7 @@ export const routes = [
     meta: {},
     children: [
       {
+        name: 'settings',
         path: 'settings',
         component: Settings,
         beforeEnter: [guards.requiresSameUser],

@@ -21,3 +21,15 @@ export const createRefreshToken = (user: User) => {
 export const sendRefreshToken = (res: Response, token: String) => {
   res.cookie('jid', token, { httpOnly: true })
 }
+
+/**
+ * Get a user with password by email
+ * @param email The user's email
+ * @returns {User} A user with password
+ */
+export const getUserWithPassword = async (email) => {
+  return await User.createQueryBuilder()
+    .addSelect('User.password AS User_password')
+    .where('email = :email', { email: email })
+    .getOne()
+}
