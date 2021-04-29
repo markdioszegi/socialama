@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 import { IsEmail, MinLength, MaxLength, IsAlphanumeric } from 'class-validator'
 import { ExtendedBaseEntity } from './ExtendedBaseEntity'
 import { IsUnique } from '../validators/IsUnique'
+import { Post } from './Post'
 
 @Entity({ name: 'users' })
 export class User extends ExtendedBaseEntity {
@@ -35,4 +36,8 @@ export class User extends ExtendedBaseEntity {
 
   @Column({ default: 0 })
   tokenVersion: number
+
+  // Relations
+  @OneToMany((type) => Post, (post) => post.user)
+  posts: Post[]
 }

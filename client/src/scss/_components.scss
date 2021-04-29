@@ -173,3 +173,12 @@ table {
     }
   }
 }
+
+.dropdown {
+  position     : absolute;
+  right        : 0;
+  top          : 3rem;
+  z-index      : $zindex-dropdown;
+  border-radius: $border-radius;
+  background   : $grey;
+}

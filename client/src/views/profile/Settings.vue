@@ -125,7 +125,7 @@ export default {
     },
     sendEdit() {
       //console.log(this.creds)
-      this.$store.dispatch('user/edit', this.creds).then((res) => {
+      this.$store.dispatch('user/update', this.creds).then((res) => {
         if (res.errors) {
           this.success = false
           this.errors = res.errors

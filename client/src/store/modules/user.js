@@ -25,7 +25,7 @@ const getters = {
 const actions = {
   async login({ commit /* dispatch */ }, credentials) {
     return fetch(process.env.VUE_APP_API_BASE_URL + '/auth/login', {
-      method: 'post',
+      method: 'POST',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
@@ -49,8 +49,8 @@ const actions = {
   // Reauthenticate the user
   // TODO: only reauthenticates after page refresh -> should loop it
   async reAuth({ commit, getters }) {
-    return fetch(process.env.VUE_APP_API_BASE_URL + '/auth/refresh_token', {
-      method: 'post',
+    return fetch(process.env.VUE_APP_API_BASE_URL + '/auth/refreshToken', {
+      method: 'POST',
       credentials: 'include',
       headers: {
         Authorization: `bearer ${getters.accessToken}`,
@@ -71,7 +71,7 @@ const actions = {
   async logout({ commit }) {
     // TODO: Should check if JWT is valid
     return fetch(process.env.VUE_APP_API_BASE_URL + '/auth/logout', {
-      method: 'post',
+      method: 'POST',
       credentials: 'include',
     })
       .then((res) => res.json())
@@ -104,9 +104,9 @@ const actions = {
       })
   },
 
-  async edit({ getters, dispatch }, creds) {
-    return fetch(process.env.VUE_APP_API_BASE_URL + '/auth/edit', {
-      method: 'post',
+  async update({ getters, dispatch }, creds) {
+    return fetch(process.env.VUE_APP_API_BASE_URL + '/users/update', {
+      method: 'PUT',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',

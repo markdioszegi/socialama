@@ -13,10 +13,23 @@
   user-select   : none;
   border-radius : $border-radius-lg;
   transition    : $transition-m;
+  white-space   : nowrap;
 
   &-icon {
-    i {
-      font-size: larger;
+    width          : 2rem;
+    height         : 2rem;
+    background     : none;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+
+    &:hover {
+      background: $grey;
+    }
+
+    &:focus,
+    &.active {
+      background: darken($grey, 15%);
     }
   }
 
@@ -29,11 +42,24 @@
 
   &-default {
     &:hover {
-      background-color: lighten($green, 20%);
+      background-color: lighten($green, 15%);
     }
 
     &:focus {
       background-color: $green;
+    }
+  }
+
+  &-option {
+    background-color: $grey;
+    min-width       : 8rem;
+
+    i {
+      margin-right: 2rem;
+    }
+
+    &:hover {
+      background-color: darken($grey, 15%)
     }
   }
 }

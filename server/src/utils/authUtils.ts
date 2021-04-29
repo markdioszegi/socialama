@@ -1,4 +1,4 @@
-import { Response } from 'express'
+import { Request, Response } from 'express'
 import { sign } from 'jsonwebtoken'
 import { User } from '../entity/User'
 

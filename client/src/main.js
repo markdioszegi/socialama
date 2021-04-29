@@ -7,6 +7,9 @@ import './scss/main.scss'
 import Modal from './components/Modal'
 import Error from './components/Error'
 import Pagination from './components/Pagination'
+import Post from './components/Post'
+import CreatePost from './components/CreatePost'
+import Dropdown from './components/Dropdown'
 
 // my store
 //import { store } from './store/store'
@@ -45,6 +48,9 @@ const app = createApp(App)
 app.component('Modal', Modal)
 app.component('Error', Error)
 app.component('Pagination', Pagination)
+app.component('Post', Post)
+app.component('CreatePost', CreatePost)
+app.component('Dropdown', Dropdown)
 
 //app.config.globalProperties.$store = store
 

@@ -67,7 +67,7 @@ export default {
       //console.log(this.username, this.email, this.password)
       console.log('Form submitted')
 
-      fetch(process.env.VUE_APP_API_BASE_URL + '/auth/register', {
+      fetch(process.env.VUE_APP_API_BASE_URL + '/users/create', {
         method: 'post',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

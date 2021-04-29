@@ -25,7 +25,21 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000/api', //change this
+        url: 'http://' + process.env.HOST + ':' + process.env.PORT + '/v1', //change this
+      },
+    ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
       },
     ],
   },
@@ -36,5 +50,5 @@ const options = {
 const specs = swaggerJSDoc(options)
 
 export default (app: Application) => {
-  app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
+  app.use('/v1/api-docs', swaggerUI.serve, swaggerUI.setup(specs, { swaggerOptions: { displayRequestDuration: true } }))
 }

@@ -5,8 +5,8 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node src/app.ts",
-    "watch": "nodemon --exec ts-node src/app.ts"
+    "start": "ts-node -r dotenv/config src/app.ts",
+    "watch": "nodemon --exec ts-node -r dotenv/config src/app.ts"
   },
   "author": "markdioszegi",
   "repository": {
@@ -23,7 +23,7 @@
     "faker": "^5.2.0",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
-    "typeorm": "^0.2.29"
+    "typeorm": "^0.2.32"
   },
   "devDependencies": {
     "@types/cors": "^2.8.9",
@@ -33,6 +33,7 @@
     "@types/node": "^8.0.29",
     "@types/swagger-jsdoc": "^6.0.0",
     "@types/swagger-ui-express": "^4.1.2",
+    "dotenv": "^8.2.0",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6",
     "ts-node": "3.3.0",

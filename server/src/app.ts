@@ -8,15 +8,18 @@ import * as cors from 'cors'
 import Routes from './routes/index'
 
 import { checkAuth } from './middleware/CheckAuth'
-import { createUsers } from './faker/createUsers'
+import { createUsers, createPosts } from './faker/faker'
 
 import swagger from './swagger/swagger'
+import { Post } from './entity/Post'
+import { User } from './entity/User'
 
 createConnection()
   .then(async (connection) => {
     // create express app
     const app = express()
-    app.use(cors({ credentials: true, origin: 'http://localhost:8080' }))
+    app.use(cors({ credentials: true, origin: process.env.ALLOWED_ORIGINS }))
+    //app.options('*', cors())
     app.use(bodyParser.json())
     app.use(cookieParser())
 
@@ -27,7 +30,7 @@ createConnection()
     // register express routes from defined application routes
     Routes.forEach((route) => {
       ;(app as any)[route.method](
-        '/api' + route.route,
+        '/v1' + route.route,
         'middleware' in route
           ? [route.middleware]
           : (req: Request, res: Response, next: Function) => {
@@ -73,16 +76,16 @@ createConnection()
 
     // Faker
     //createUsers(100)
+    //createPosts(20)
 
     if (process.env.NODE_ENV === 'development') {
       console.log('Server is in development mode!')
     }
 
     // start express server
-    const mode = process.env.NODE_ENV === 'development' ? 'localhost' : process.env.HOST
-    app.listen({ host: mode, port: process.env.PORT })
+    app.listen({ host: process.env.HOST, port: process.env.PORT })
 
     console.log(`Express server has started on port ${process.env.PORT}.`)
-    console.log(`Open http://${mode}:${process.env.PORT}/api/users to see results.`)
+    console.log(`Open http://${process.env.HOST}:${process.env.PORT}/api/users to see results.`)
   })
   .catch((error) => console.log(error))

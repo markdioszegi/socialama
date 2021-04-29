@@ -13,6 +13,8 @@
 
 # Dependecies
 
+## Back-end
+
 - **express**: for serving
 - **cookie-parser**: to parse cookies into key/value pairs
 - **cors**: allow API access for frontend
@@ -23,6 +25,11 @@
 - **jsonwebtoken**: for signing and veryfing tokens (authentication)
 - **faker**: for creating massive amount of fake data
 - **swagger-ui-express** & **swagger-jsdoc**: documenting the REST API
+- **dotenv**: managing env vars
+
+## Front-end
+
+- **vue, vue-router, vuex**: pretty much the basic ecosystem of Vue
 
 # Features that'll be implemented in the future
 

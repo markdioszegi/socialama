@@ -50,7 +50,7 @@ export default {
   methods: {
     changePage(newPage) {
       //console.log(this.currentPage + ' | ' + newPage)
-      this.$emit('page-changed', newPage)
+      this.$emit('onpagechanged', newPage)
       this.ignoreRouteChange = true
       // change query
       this.$router
@@ -69,7 +69,7 @@ export default {
     $route(to, from) {
       if (!this.ignoreRouteChange)
         if (to.name === from.name) {
-          this.changePage(Number(this.$route.query.pageNumber))
+          this.changePage(Number(this.$route.query.pageNumber || from.query.pageNumber))
         }
     },
   },

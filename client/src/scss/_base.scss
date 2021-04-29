@@ -8,7 +8,7 @@ $dark-blue : #3d405b;
 $bg-color  : #fbf9f6;
 $white     : #fff;
 
-$grey: #ecedf3;
+$grey: #ebeaec;
 
 $red    : #e73763;
 $green  : #16d887;
@@ -32,11 +32,11 @@ $transition-m: all 0.15s ease;
 
 $modal-bg: #0a010157;
 
-$shadow-sm : rgba(0, 0, 0, 0.25) 0px 20px 25px -5px,
+$shadow-sm : rgba(33, 25, 34, 0.27) 0px 20px 25px -5px,
 rgba(0, 0, 0, 0.1) 0px 10px 10px -5px;
-$shadow-md : rgba(93, 60, 109, 0.082) 0 1px 10px 0;
-$shadow-lg : rgba(82, 63, 105, 0.078) 0 5px 30px 0;
-$shadow-xl : rgba(82, 63, 105, 0.116) 0 7px 50px 0;
+$shadow-md : rgba(44, 38, 47, 0.267) 0 1px 10px 0;
+$shadow-lg : rgba(27, 25, 29, 0.287) 0 5px 25px 0;
+$shadow-xl : rgba(0, 0, 0, 0.3) 0 6px 30px 0;
 
 $zindex-dropdown      : 10 !default;
 $zindex-sticky        : 20 !default;
@@ -188,6 +188,15 @@ p {
 
 .text-uppercase {
   text-transform: uppercase;
+}
+
+//Shadows
+.shadow-sm {
+  box-shadow: $shadow-sm;
+}
+
+.shadow-xl {
+  box-shadow: $shadow-xl;
 }
 
 //Animations

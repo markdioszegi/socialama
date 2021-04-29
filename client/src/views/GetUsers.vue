@@ -11,7 +11,7 @@
             :currentPage="currentPage"
             :totalPages="totalPages"
             :perPage="perPage"
-            @page-changed="onPageChanged"
+            @onpagechanged="onPageChanged"
           />
         </div>
 
