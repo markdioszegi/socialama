@@ -97,21 +97,19 @@ export default {
     fetchData() {
       this.loading = true
       //console.log('Fetching...')
-      setTimeout(() => {
-        fetch(process.env.VUE_APP_API_BASE_URL + `/users?page=${this.currentPage}&limit=${this.perPage}`, {
-          method: 'get',
-          credentials: 'include',
-          headers: { Authorization: `bearer ${this.$store.state.accessToken}` },
+      fetch(process.env.VUE_APP_API_BASE_URL + `/users?page=${this.currentPage}&limit=${this.perPage}`, {
+        method: 'get',
+        credentials: 'include',
+        headers: { Authorization: `bearer ${this.$store.state.accessToken}` },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          this.users = data.users
+          this.totalPages = data.totalPages
+          this.loading = false
+          //console.log(data)
         })
-          .then((res) => res.json())
-          .then((data) => {
-            this.users = data.users
-            this.totalPages = data.totalPages
-            this.loading = false
-            //console.log(data)
-          })
-          .catch((err) => console.log(err.message))
-      }, 500)
+        .catch((err) => console.log(err.message))
     },
   },
 }

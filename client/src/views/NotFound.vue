@@ -1,5 +1,6 @@
 <template>
-  <h1>404 Not found! :D</h1>
+  <h1>404 Not found!</h1>
+  <h2>This section is under construction.</h2>
 </template>
 
 <script>

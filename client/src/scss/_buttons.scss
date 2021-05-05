@@ -8,7 +8,7 @@
   font-weight   : $font-weight-bolder;
   border        : none;
   outline       : none;
-  padding       : 1rem;
+  padding       : .75rem;
   vertical-align: middle;
   user-select   : none;
   border-radius : $border-radius-lg;
@@ -51,10 +51,14 @@
   }
 
   &-option {
+    display         : flex;
     background-color: $grey;
     min-width       : 8rem;
+    width           : 100%;
 
     i {
+      width       : 1rem;
+      height      : 1rem;
       margin-right: 2rem;
     }
 

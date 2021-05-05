@@ -80,7 +80,7 @@ export default [
   },
   {
     method: 'put',
-    route: '/posts',
+    route: '/posts/:postId',
     controller: PostController,
     action: 'update',
     middleware: [checkAuth],

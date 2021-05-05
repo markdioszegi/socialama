@@ -27,7 +27,28 @@ export class PostController {
     }
   }
 
-  async update(request: Request, response: Response, next: NextFunction) {}
+  async update(request: Request, response: Response, next: NextFunction) {
+    const payload = response.locals.payload
+
+    let post = await Post.findOne({ where: { user_id: payload.userId, id: request.params.postId } })
+
+    if (!post) {
+      return { error: 'No post!' }
+    }
+
+    post.title = request.body.title
+    post.text = request.body.text
+
+    const errors = await validate(post)
+
+    if (errors.length > 0) {
+      response.status(400)
+      return { errors: errors }
+    } else {
+      await Post.save(post)
+      return { success: 'Post updated' }
+    }
+  }
 
   async delete(request: Request, response: Response, next: NextFunction) {
     const payload = response.locals.payload

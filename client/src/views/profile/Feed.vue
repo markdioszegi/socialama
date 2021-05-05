@@ -3,34 +3,44 @@
 
   <h1 v-if="error" class="text-error">Couldn't find user {{ $route.params.username }}.</h1>
 
-  <div v-if="!loading && !error" class="row">
-    <!-- Root div -->
-    <div class="col-3 p-1">
-      <div class="card">
-        <div class="px-2 py-1">
-          <h1>You are viewing {{ user?.username }}'s profile page.</h1>
+  <transition name="dropdown">
+    <div v-if="!loading && !error" class="row">
+      <!-- Root div -->
+      <div class="col-3 p-1">
+        <div class="card">
+          <div class="px-2 py-1">
+            <h1>You are viewing {{ user?.username }}'s profile page.</h1>
 
-          <div v-if="user?.username === $store.getters['user/user'].username">
-            <h1>This is your page!</h1>
+            <div v-if="user?.username === $store.getters['user/user'].username">
+              <h1>This is your page!</h1>
+            </div>
+
+            <p v-for="(prop, name) in user" :key="name">{{ name }}: {{ prop }}</p>
           </div>
-
-          <p v-for="(prop, name) in user" :key="name">{{ name }}: {{ prop }}</p>
         </div>
       </div>
+
+      <div class="col-9 p-1">
+        <CreatePost class="mb-4" @onpostsupdate="fetchData" />
+        <!-- <h1>Posts</h1> -->
+
+        <transition-group name="dropdown">
+          <div :post-id="post.id" v-for="post in posts" :key="post.id">
+            <Post class="mb-2" :post="post" @onpostsupdate="fetchData" @onunsavedchanges="unsavedChanges = true" />
+          </div>
+        </transition-group>
+      </div>
     </div>
+  </transition>
 
-    <div class="col-9 p-1">
-      <CreatePost class="mb-4" @onpostsupdate="fetchData" />
-
-      <!-- <h1>Posts</h1> -->
-
-      <transition-group name="dropdown">
-        <div :post-id="post.id" v-for="post in posts" :key="post.id">
-          <Post class="mb-2" :post="post" @onpostsupdate="fetchData" />
-        </div>
-      </transition-group>
-    </div>
-  </div>
+  <!-- Modal -->
+  <Modal
+    @showModal="toggleUnsavedChangesModal"
+    @modalConfirmed="confirmUnsavedChangesModal"
+    v-if="unsavedChangesModalVisible"
+    headerText="Alert"
+    bodyText="You have unsaved changes. Do you want to leave?"
+  />
 </template>
 
 <script>
@@ -41,6 +51,8 @@ export default {
       loading: true,
       posts: null,
       error: null,
+      unsavedChanges: false,
+      unsavedChangesModalVisible: false,
     }
   },
 
@@ -56,7 +68,7 @@ export default {
 
   methods: {
     async fetchData() {
-      console.log('Fetching data')
+      console.log('Fetching data...')
       // Fetch data
       await fetch(process.env.VUE_APP_API_BASE_URL + '/users?username=' + this.$route.params.username)
         .then((res) => res.json())
@@ -82,6 +94,25 @@ export default {
           this.posts = data.posts
         })
     },
+
+    confirmUnsavedChangesModal() {
+      console.log('Confirmed!')
+      this.unsavedChangesModalVisible = false
+    },
+
+    toggleUnsavedChangesModal() {
+      this.unsavedChangesModalVisible = !this.unsavedChangesModalVisible
+    },
+  },
+
+  async beforeRouteLeave(/* to, from, next */) {
+    /* if (this.unsavedChanges) {
+      this.unsavedChangesModalVisible = true
+      next(false)
+    } else {
+      next()
+    } */
+    //console.log(to, from)
   },
 }
 </script>
