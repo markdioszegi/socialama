@@ -29,7 +29,6 @@ export class UserController {
       response.status(400)
       return errors
     } else {
-      user.password = await hash(request.body.password, {}) // hash the password
       await User.save(user)
       return { success: 'User successfully registered.' }
     }
@@ -99,7 +98,7 @@ export class UserController {
     if (creds.oldPassword != '' && creds.newPassword != '')
       if (await verify(currentUser.password, creds.oldPassword)) {
         if (creds.oldPassword !== creds.newPassword) {
-          currentUser.password = await hash(creds.newPassword)
+          currentUser.password = creds.newPassword
         } else {
           errors.push({ constraints: { passwordsMatch: "New password shouldn't match with the old one!" } })
         }

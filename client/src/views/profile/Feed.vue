@@ -26,7 +26,7 @@
 
         <transition-group name="dropdown">
           <div :post-id="post.id" v-for="post in posts" :key="post.id">
-            <Post class="mb-2" :post="post" @onpostsupdate="fetchData" @onunsavedchanges="unsavedChanges = true" />
+            <Post class="mb-2" :post="post" @onpostsupdate="fetchData" @onunsavedchanges="onUnsavedChanges" />
           </div>
         </transition-group>
       </div>
@@ -93,6 +93,10 @@ export default {
         .then((data) => {
           this.posts = data.posts
         })
+    },
+
+    onUnsavedChanges() {
+      console.log("Unsaved :O");
     },
 
     confirmUnsavedChangesModal() {

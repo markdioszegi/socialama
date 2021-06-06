@@ -47,6 +47,8 @@ const options = {
   apis: ['./src/routes/*.ts'],
 }
 
+console.log(process.env.API_VERSION)
+
 const specs = swaggerJSDoc(options)
 
 export default (app: Application) => {

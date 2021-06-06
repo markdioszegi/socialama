@@ -24,10 +24,10 @@ export const sendRefreshToken = (res: Response, token: String) => {
 
 /**
  * Get a user with password by email
- * @param email The user's email
+ * @param {string} email The user's email
  * @returns {User} A user with password
  */
-export const getUserWithPassword = async (email) => {
+export const getUserWithPassword = async (email: string): Promise<User> => {
   return await User.createQueryBuilder()
     .addSelect('User.password AS User_password')
     .where('email = :email', { email: email })

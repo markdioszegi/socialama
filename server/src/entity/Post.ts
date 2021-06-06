@@ -20,6 +20,9 @@ export class Post extends ExtendedBaseEntity {
   @MinLength(3, {
     message: 'Text is too short. Minimum length is $constraint1 characters.',
   })
+  @MaxLength(1024, {
+    message: 'Text is too long. Maximum length is $constraint1 characters.',
+  })
   @Column({ type: 'mediumtext' })
   text: string
 

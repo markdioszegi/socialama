@@ -1,8 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BeforeInsert, BeforeUpdate } from 'typeorm'
 import { IsEmail, MinLength, MaxLength, IsAlphanumeric } from 'class-validator'
 import { ExtendedBaseEntity } from './ExtendedBaseEntity'
 import { IsUnique } from '../validators/IsUnique'
 import { Post } from './Post'
+import { hash } from 'argon2'
 
 @Entity({ name: 'users' })
 export class User extends ExtendedBaseEntity {
@@ -40,4 +41,10 @@ export class User extends ExtendedBaseEntity {
   // Relations
   @OneToMany((type) => Post, (post) => post.user)
   posts: Post[]
+
+  @BeforeUpdate()
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await hash(this.password)
+  }
 }

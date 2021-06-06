@@ -1,21 +1,22 @@
 import { createApp } from 'vue'
 import App from '@/App.vue'
-import { router } from './router/index'
-import './scss/main.scss'
+import { router } from '@/router/index'
+import '@/scss/main.scss'
 
 // import global components
-import Modal from './components/Modal'
-import Error from './components/Error'
-import Pagination from './components/Pagination'
-import Post from './components/Post'
-import CreatePost from './components/CreatePost'
-import Dropdown from './components/Dropdown'
+import Modal from '@/components/Modal'
+import Error from '@/components/Error'
+import Pagination from '@/components/Pagination'
+import Post from '@/components/Post'
+import CreatePost from '@/components/CreatePost'
+import EditPost from '@/components/EditPost'
+import Dropdown from '@/components/Dropdown'
 
 // my store
 //import { store } from './store/store'
 
 // vuex
-import store from './store/vuexStore'
+import store from '@/store/vuexStore'
 import jwtDecode from 'jwt-decode'
 
 const app = createApp(App)
@@ -50,7 +51,14 @@ app.component('Error', Error)
 app.component('Pagination', Pagination)
 app.component('Post', Post)
 app.component('CreatePost', CreatePost)
+app.component('EditPost', EditPost)
 app.component('Dropdown', Dropdown)
+
+//global properties
+//post specific globals
+app.config.globalProperties.$post = {
+  maxLen: 1024,
+}
 
 //app.config.globalProperties.$store = store
 

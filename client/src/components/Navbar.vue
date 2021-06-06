@@ -2,7 +2,7 @@
   <div class="navbar-wrapper">
     <nav class="navbar-expand-lg" :class="isSticky ? 'sticky' : ''">
       <div class="container d-flex align-items-center justify-content-between">
-        <router-link to="/"><img class="navbar-logo" src="../assets/logo.png" alt="Logo"/></router-link>
+        <router-link to="/"><img class="navbar-logo" src="../assets/llama.svg" alt="Logo"/></router-link>
 
         <ul class="navbar-nav">
           <li class="nav-item">

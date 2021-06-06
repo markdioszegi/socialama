@@ -1,51 +1,38 @@
 <template>
-  <div class="card" :class="{ editing: editing }">
-    <div class="card-header">
-      <div>
-        <!-- Editing section -->
-        <div class="d-flex justify-content-between" v-if="editing">
-          <input v-model="editedPost.title" type="text" :placeholder="post.title" />
-        </div>
+  <div>
+    <div v-if="!editing" class="card">
+      <div class="card-header">
+        <div>
+          <!-- View section -->
+          <div class="d-flex justify-content-between word-break-all">
+            <h4>{{ post.title }}</h4>
 
-        <!-- View section -->
-        <div class="d-flex justify-content-between word-break-all" v-if="!editing">
-          <h4>{{ post.title }}</h4>
+            <!-- Wrapper -->
+            <div v-if="checkSameUser()" v-click-outside="hideDropdown" class="position-relative">
+              <button
+                @click="dropdownHidden = !dropdownHidden"
+                class="btn btn-icon"
+                :class="{ active: !dropdownHidden }"
+              >
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
 
-          <!-- Wrapper -->
-          <div v-if="checkSameUser()" v-click-outside="hideDropdown" class="position-relative">
-            <button @click="dropdownHidden = !dropdownHidden" class="btn btn-icon" :class="{ active: !dropdownHidden }">
-              <i class="fas fa-ellipsis-v"></i>
-            </button>
-
-            <Dropdown :dropdownHidden="dropdownHidden">
-              <div class="p-1">
-                <button @click="editPost" class="btn btn-option"><i class="fas fa-edit"></i>Edit post</button>
-                <button @click="deletePost" class="btn btn-option"><i class="fas fa-trash"></i>Delete post</button>
-              </div>
-            </Dropdown>
+              <Dropdown :dropdownHidden="dropdownHidden">
+                <div class="p-1">
+                  <button @click="editPost" class="btn btn-option"><i class="fas fa-edit"></i>Edit post</button>
+                  <button @click="deletePost" class="btn btn-option"><i class="fas fa-trash"></i>Delete post</button>
+                </div>
+              </Dropdown>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="card-body">
-      <div v-if="editing">
-        <textarea v-model="editedPost.text" class="w-100" :placeholder="post.text" />
-
-        <!-- Wrapper -->
-        <div class="text-right">
-          <button @click="discardChanges" class="btn btn-outline-danger">Discard changes</button>
-          <button @click="sendEditedPost" class="btn btn-success">Apply changes</button>
-        </div>
-      </div>
-      <div v-if="!editing">
+      <div class="card-body">
         <p>{{ post.text }}</p>
       </div>
-
-      <!-- Show errors if any -->
-      <transition name="dropdown">
-        <Error v-if="errors" :errors="errors" />
-      </transition>
     </div>
+
+    <EditPost :post="post" v-if="editing" @oncloseediting="discardChanges" />
   </div>
 </template>
 
@@ -56,8 +43,7 @@ export default {
     return {
       dropdownHidden: true,
       editing: false,
-      editedPost: {},
-      errors: null,
+      editedPost: this.post,
     }
   },
 
@@ -74,30 +60,7 @@ export default {
       this.hideDropdown()
 
       this.editing = true
-      this.$emit('onunsavedchanges')
-    },
-
-    async sendEditedPost() {
-      await fetch(process.env.VUE_APP_API_BASE_URL + '/posts/' + this.post.id, {
-        method: 'PUT',
-        credentials: 'include',
-        headers: {
-          Authorization: `bearer ${this.$store.getters['user/accessToken']}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(this.editedPost),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.errors) {
-            this.errors = data.errors
-          } else {
-            this.editing = false
-            this.errors = null
-          }
-        })
-
-      this.$emit('onpostsupdate')
+      //this.$emit('onunsavedchanges')
     },
 
     async deletePost() {
@@ -117,7 +80,7 @@ export default {
 
     discardChanges() {
       this.editing = false
-      this.errors = null
+      this.$emit('onpostsupdate')
     },
 
     checkSameUser() {

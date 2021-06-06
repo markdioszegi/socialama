@@ -1,9 +1,14 @@
 <template>
   <h2 class="text-success" v-if="redirectMsg">{{ redirectMsg }}</h2>
-  <!-- <h1>You are at the home page!</h1>
-  {{ sharedState.counter }} -->
-
-  <p>{{ states.token ? states.token : 'access token is literally nothing' }}</p>
+  <div class="card">
+    <div class="card-header">
+      <h1>You are at the home page!</h1>
+    </div>
+    <div class="card-body">
+      <p>Here goes something...</p>
+    </div>
+  </div>
+  <!-- <p>{{ states.token ? states.token : 'access token is literally nothing' }}</p>
   <p>{{ states.user ? states.user : 'user is literally nothing' }}</p>
   <p>Am I authenticated: {{ states.isAuthenticated ? true : false }}</p>
 
@@ -39,14 +44,13 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
 export default {
   data() {
     return {
-      sharedState: this.$store,
     }
   },
   props: { redirectMsg: {} },

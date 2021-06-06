@@ -6,13 +6,11 @@ import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser'
 import * as cors from 'cors'
 import Routes from './routes/index'
+import 'dotenv/config'
 
 import { checkAuth } from './middleware/CheckAuth'
-import { createUsers, createPosts } from './faker/faker'
 
 import swagger from './swagger/swagger'
-import { Post } from './entity/Post'
-import { User } from './entity/User'
 
 createConnection()
   .then(async (connection) => {
@@ -73,10 +71,6 @@ createConnection()
 
     // setup express app here
     app.set('json spaces', 4)
-
-    // Faker
-    //createUsers(100)
-    //createPosts(20)
 
     if (process.env.NODE_ENV === 'development') {
       console.log('Server is in development mode!')

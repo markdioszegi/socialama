@@ -1,6 +1,9 @@
 .DS_Store
 node_modules
-/dist
+
+# build directories
+client/dist
+server/build
 
 # local env files
 .env.local
