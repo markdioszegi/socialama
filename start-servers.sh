@@ -1,2 +1,2 @@
-start pwsh -command "cd ./server; npm run watch";
-start pwsh -command "cd ./client; npm run serve";
+start pwsh -command "cd ./backend; npm run watch";
+start pwsh -command "cd ./frontend; npm run serve";

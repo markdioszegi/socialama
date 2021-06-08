@@ -2,8 +2,8 @@
 node_modules
 
 # build directories
-client/dist
-server/build
+frontend/dist
+backend/build
 
 # local env files
 .env.local

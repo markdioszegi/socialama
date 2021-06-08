@@ -1,0 +1,53 @@
+{
+  "name": "socialama-rest",
+  "version": "1.0.0",
+  "description": "A simple REST API server.",
+  "main": "src/app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node -r tsconfig-paths/register src/app.ts",
+    "watch": "nodemon --exec ts-node -r tsconfig-paths/register src/app.ts",
+    "seed": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "build": "tsc -p ."
+  },
+  "author": "markdioszegi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markdioszegi/socialama"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "argon2": "^0.27.2",
+    "class-validator": "^0.13.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "faker": "^5.5.3",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "typeorm": "^0.2.32"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.12",
+    "@types/faker": "^5.5.5",
+    "@types/jsonwebtoken": "^8.5.1",
+    "@types/node": "^15.6.1",
+    "@types/swagger-jsdoc": "^6.0.0",
+    "@types/swagger-ui-express": "^4.1.2",
+    "dotenv": "^10.0.0",
+    "express-winston": "^4.1.0",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6",
+    "ts-node": "^10.0.0",
+    "tsconfig-paths": "^3.9.0",
+    "tslib": "^2.2.0",
+    "typeorm-seeding": "^1.6.1",
+    "typescript": "^4.3.2",
+    "winston": "^3.3.3"
+  },
+  "apidoc": {
+    "title": "Socialama",
+    "url": "http://localhost:8080/"
+  }
+}
